@@ -85,7 +85,7 @@ struct MainScreen: View {
                             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), spacing: 15) {
                                 ForEach(ClassicItemsMenu) { coffee in
                                     CoffeeCard(coffee: coffee)
-                                // ToDo: нажатие по карточкк должно открывать модальное окно
+                                    // ToDo: нажатие по карточкк должно открывать модальное окно
                                         .onTapGesture {
                                             selectedCoffee = coffee
                                             print(selectedCoffee)

@@ -82,6 +82,6 @@ struct CoffeView: View {
 struct CoffeView_Previews: PreviewProvider {
     static var previews: some View {
         let tempCoffee: Coffee? = SeasnonItemsMenu.first // Используйте первый кофе из списка для превью
-                
-                return CoffeView(coffee: .constant(tempCoffee))    }
+        
+        return CoffeView(coffee: .constant(tempCoffee))    }
 }
