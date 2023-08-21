@@ -38,7 +38,7 @@ struct MainScreen: View {
                                 .padding(.bottom)
                         })
                         
-                        // Эта часть должна прилепляться...
+                        // ToDo: Эта часть должна прилепляться...
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 15) {
                                 ForEach(menuType.indices, id: \.self) { index in
@@ -67,10 +67,7 @@ struct MainScreen: View {
                                 .frame(height: 1)
                             , alignment: .top
                         )
-                    
-                            
-                        
-                        // Тут заканчивается зона прилепления
+                        // ToDo: Тут заканчивается зона прилепления
                         
                         
                         // Classic Menu...
@@ -88,6 +85,7 @@ struct MainScreen: View {
                             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), spacing: 15) {
                                 ForEach(ClassicItemsMenu) { coffee in
                                     CoffeeCard(coffee: coffee)
+                                // ToDo: нажатие по карточкк должно открывать модальное окно
                                         .onTapGesture {
                                             selectedCoffee = coffee
                                             print(selectedCoffee)
