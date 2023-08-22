@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct MainScreen: View {
-    // Selected Category...
-    @State var selectedCategory : Category = categories.first!
-    @State private var scrollToCategory: Category?
-    
+
     @State private var isCoffeeModalPresented = false
-    @State private var selectedCoffee: Coffee?
+    @State private var selectedCoffee = ClassicItemsMenu.first
     
     @State private var selectedCategoryIndex = 0
     
@@ -60,13 +57,7 @@ struct MainScreen: View {
                             }
                             .padding(.horizontal)
                         }
-                        .overlay(
-                            GeometryReader { proxy in
-                                Color.clear.preference(key: ViewOffsetKey.self, value: proxy.frame(in: .global).minY)
-                            }
-                                .frame(height: 1)
-                            , alignment: .top
-                        )
+                        
                         // ToDo: Тут заканчивается зона прилепления
                         
                         
@@ -85,7 +76,6 @@ struct MainScreen: View {
                             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), spacing: 15) {
                                 ForEach(ClassicItemsMenu) { coffee in
                                     CoffeeCard(coffee: coffee)
-                                    // ToDo: нажатие по карточкк должно открывать модальное окно
                                         .onTapGesture {
                                             selectedCoffee = coffee
                                             print(selectedCoffee)
@@ -111,6 +101,11 @@ struct MainScreen: View {
                             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 15)], spacing: 15) {
                                 ForEach(BrandedItemsMenu) { coffee in
                                     CoffeeCard(coffee: coffee)
+                                        .onTapGesture {
+                                            selectedCoffee = coffee
+                                            print(selectedCoffee)
+                                            isCoffeeModalPresented = true
+                                        }
                                 }
                             }
                         }
@@ -131,6 +126,11 @@ struct MainScreen: View {
                             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 15)], spacing: 15) {
                                 ForEach(SeasnonItemsMenu) { coffee in
                                     CoffeeCard(coffee: coffee)
+                                        .onTapGesture {
+                                            selectedCoffee = coffee
+                                            print(selectedCoffee)
+                                            isCoffeeModalPresented = true
+                                        }
                                 }
                             }
                         }
@@ -139,8 +139,8 @@ struct MainScreen: View {
                     
                     .sheet(isPresented: $isCoffeeModalPresented) {
                         if let selectedCoffee = selectedCoffee {
-                            CoffeView(coffee: $selectedCoffee)
-                        }
+CoffeView(coffee: $selectedCoffee)
+                      }
                     }
                 }
             }
@@ -160,5 +160,28 @@ struct ViewOffsetKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
+    }
+}
+
+struct OffsetKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+extension View {
+    @ViewBuilder
+    func offset(coordinateSpace: CoordinateSpace, complition: @escaping (CGFloat)->()) -> some View {
+        self
+            .overlay {
+                GeometryReader { proxy in
+                    let minY = proxy.frame(in: coordinateSpace).minY
+                    Color.clear
+                        .preference(key: OffsetKey.self, value: minY)
+                        .onPreferenceChange(OffsetKey.self){ value in
+                        complition(value)
+                    }
+                }
+            }
     }
 }

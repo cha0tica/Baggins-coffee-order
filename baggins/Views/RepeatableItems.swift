@@ -58,12 +58,12 @@ struct CoffeeCard: View {
             
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("\(coffee.size) мл")
+                    Text("\(coffee.sizes.first?.size ?? 0) мл")
                         .fontWeight(.light)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                     
-                    Text("\(coffee.price) ₽")
+                    Text("\(coffee.sizes.first?.price ?? 0) ₽")
                         .fontWeight(.bold)
                         .font(.system(size: 18))
                         .foregroundColor(.black)

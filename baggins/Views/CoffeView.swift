@@ -10,7 +10,6 @@ import SwiftUI
 struct CoffeView: View {
     @Binding var coffee: Coffee?
     @Environment(\.presentationMode) var presentationMode
-    
     @State private var selectedSizeIndex = 0 // Индекс выбранного размера
     
     var body: some View {
@@ -47,12 +46,22 @@ struct CoffeView: View {
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                         
-                        Text("БЖУ: \(coffee.value)")
+                        //Выбор размера ...
+                        Picker(selection: $selectedSizeIndex, label: Text("Объем: ")) {
+                            ForEach(coffee.sizes.indices, id: \.self) { index in
+                                Text("\(coffee.sizes[index].size) мл")
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding(.horizontal)
+                        //Размер выбрали
+                        
+                        Text("БЖУ: \(coffee.sizes[selectedSizeIndex].value)")
                             .fontWeight(.light)
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                         
-                        Text("\(coffee.price) ₽")
+                        Text("\(coffee.sizes[selectedSizeIndex].price) ₽")
                             .fontWeight(.bold)
                             .font(.system(size: 22))
                             .foregroundColor(.black)
@@ -67,10 +76,6 @@ struct CoffeView: View {
                                 .background(Color("BagginsRed"))
                                 .cornerRadius(10)
                         }
-                        Text("Debug: \(coffee.coffee)")
-                            .onAppear() {
-                                print("Надо проверить: \(coffee)")
-                            }
                     }
                     .padding(.horizontal)
                 }
