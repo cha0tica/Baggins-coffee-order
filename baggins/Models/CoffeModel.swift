@@ -13,6 +13,7 @@ struct Coffee: Identifiable {
     var coffee: String
     var sizes: [CoffeeSize]
     var description: String
+    
 }
 
 struct CoffeeSize: Identifiable {
@@ -20,6 +21,15 @@ struct CoffeeSize: Identifiable {
     var size: Int
     var price: Int
     var value: String
+}
+
+struct CoffeeCartCard : Identifiable {
+    var id: String = UUID().uuidString
+    var image: String
+    var coffee: String
+    var size: Int
+    var price: Int
+    var selectedSizeIndex: Int
 }
 
 var ClassicItemsMenu = [
@@ -132,3 +142,10 @@ var SeasnonItemsMenu = [
         description: "Состав: лед, яблочный сок, тоник, сироп \"персик\", сок лайма"
     )
 ]
+
+
+extension Coffee: Equatable {
+    static func ==(lhs: Coffee, rhs: Coffee) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

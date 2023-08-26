@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D10880402A9800B900503B70 /* CartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D108803F2A9800B900503B70 /* CartController.swift */; };
 		D136AA032A924C4000366079 /* CoffeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D136AA022A924C4000366079 /* CoffeView.swift */; };
 		D136AA042A924C4000366079 /* CoffeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D136AA022A924C4000366079 /* CoffeView.swift */; };
 		D136AA052A924C4000366079 /* CoffeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D136AA022A924C4000366079 /* CoffeView.swift */; };
-		D136AA072A924CA300366079 /* RepeatableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D136AA062A924CA300366079 /* RepeatableItems.swift */; };
-		D136AA082A924CA300366079 /* RepeatableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D136AA062A924CA300366079 /* RepeatableItems.swift */; };
-		D136AA092A924CA300366079 /* RepeatableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D136AA062A924CA300366079 /* RepeatableItems.swift */; };
 		D162B1DF2A900BDF00C6E47A /* bagginsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D162B1DE2A900BDF00C6E47A /* bagginsApp.swift */; };
 		D162B1E12A900BDF00C6E47A /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D162B1E02A900BDF00C6E47A /* SplashScreen.swift */; };
 		D162B1E32A900BE000C6E47A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D162B1E22A900BE000C6E47A /* Assets.xcassets */; };
@@ -26,6 +24,10 @@
 		D1E6F7332A90B355004D5C39 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D162B1E02A900BDF00C6E47A /* SplashScreen.swift */; };
 		D1E6F7342A90B355004D5C39 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D162B1E02A900BDF00C6E47A /* SplashScreen.swift */; };
 		D1E6F7372A90B39F004D5C39 /* CoffeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E6F7362A90B39F004D5C39 /* CoffeModel.swift */; };
+		D1F6871F2A94FB5A005A0558 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F6871E2A94FB5A005A0558 /* CartManager.swift */; };
+		D1F687212A968BBE005A0558 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F687202A968BBE005A0558 /* CartView.swift */; };
+		D1F687242A968C1F005A0558 /* CoffeeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F687232A968C1F005A0558 /* CoffeeCard.swift */; };
+		D1F687282A968D27005A0558 /* CartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F687272A968D27005A0558 /* CartCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D108803F2A9800B900503B70 /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
 		D136AA022A924C4000366079 /* CoffeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeView.swift; sourceTree = "<group>"; };
-		D136AA062A924CA300366079 /* RepeatableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatableItems.swift; sourceTree = "<group>"; };
 		D162B1DB2A900BDF00C6E47A /* baggins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baggins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D162B1DE2A900BDF00C6E47A /* bagginsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bagginsApp.swift; sourceTree = "<group>"; };
 		D162B1E02A900BDF00C6E47A /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -59,7 +61,12 @@
 		D162B1F92A900BE100C6E47A /* bagginsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bagginsUITests.swift; sourceTree = "<group>"; };
 		D162B1FB2A900BE100C6E47A /* bagginsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bagginsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D162B20E2A900FCC00C6E47A /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		D16DB4022A9A1FD60018F0CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D1E6F7362A90B39F004D5C39 /* CoffeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeModel.swift; sourceTree = "<group>"; };
+		D1F6871E2A94FB5A005A0558 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		D1F687202A968BBE005A0558 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		D1F687232A968C1F005A0558 /* CoffeeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeCard.swift; sourceTree = "<group>"; };
+		D1F687272A968D27005A0558 /* CartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +117,9 @@
 		D162B1DD2A900BDF00C6E47A /* baggins */ = {
 			isa = PBXGroup;
 			children = (
+				D16DB4022A9A1FD60018F0CE /* Info.plist */,
 				D162B1DE2A900BDF00C6E47A /* bagginsApp.swift */,
+				D1F687222A968BF0005A0558 /* RepetableItems */,
 				D1E6F7352A90B383004D5C39 /* Models */,
 				D1E6F7322A90B34D004D5C39 /* Views */,
 				D162B1E22A900BE000C6E47A /* Assets.xcassets */,
@@ -150,7 +159,7 @@
 				D162B1E02A900BDF00C6E47A /* SplashScreen.swift */,
 				D162B20E2A900FCC00C6E47A /* MainScreen.swift */,
 				D136AA022A924C4000366079 /* CoffeView.swift */,
-				D136AA062A924CA300366079 /* RepeatableItems.swift */,
+				D1F687202A968BBE005A0558 /* CartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,8 +168,19 @@
 			isa = PBXGroup;
 			children = (
 				D1E6F7362A90B39F004D5C39 /* CoffeModel.swift */,
+				D1F6871E2A94FB5A005A0558 /* CartManager.swift */,
+				D108803F2A9800B900503B70 /* CartController.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D1F687222A968BF0005A0558 /* RepetableItems */ = {
+			isa = PBXGroup;
+			children = (
+				D1F687232A968C1F005A0558 /* CoffeeCard.swift */,
+				D1F687272A968D27005A0558 /* CartCard.swift */,
+			);
+			path = RepetableItems;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,11 +313,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F687282A968D27005A0558 /* CartCard.swift in Sources */,
 				D162B20F2A900FCC00C6E47A /* MainScreen.swift in Sources */,
-				D136AA072A924CA300366079 /* RepeatableItems.swift in Sources */,
+				D1F6871F2A94FB5A005A0558 /* CartManager.swift in Sources */,
 				D162B1E12A900BDF00C6E47A /* SplashScreen.swift in Sources */,
+				D1F687242A968C1F005A0558 /* CoffeeCard.swift in Sources */,
 				D162B1DF2A900BDF00C6E47A /* bagginsApp.swift in Sources */,
 				D136AA032A924C4000366079 /* CoffeView.swift in Sources */,
+				D10880402A9800B900503B70 /* CartController.swift in Sources */,
+				D1F687212A968BBE005A0558 /* CartView.swift in Sources */,
 				D1E6F7372A90B39F004D5C39 /* CoffeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,7 +330,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D136AA082A924CA300366079 /* RepeatableItems.swift in Sources */,
 				D136AA042A924C4000366079 /* CoffeView.swift in Sources */,
 				D1E6F7342A90B355004D5C39 /* SplashScreen.swift in Sources */,
 				D162B2102A900FCC00C6E47A /* MainScreen.swift in Sources */,
@@ -321,7 +344,6 @@
 				D1E6F7332A90B355004D5C39 /* SplashScreen.swift in Sources */,
 				D136AA052A924C4000366079 /* CoffeView.swift in Sources */,
 				D162B2112A900FCC00C6E47A /* MainScreen.swift in Sources */,
-				D136AA092A924CA300366079 /* RepeatableItems.swift in Sources */,
 				D162B1FC2A900BE100C6E47A /* bagginsUITestsLaunchTests.swift in Sources */,
 				D162B1FA2A900BE100C6E47A /* bagginsUITests.swift in Sources */,
 			);
@@ -468,7 +490,7 @@
 				DEVELOPMENT_TEAM = Q6UCUC8752;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = baggins/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -497,7 +519,7 @@
 				DEVELOPMENT_TEAM = Q6UCUC8752;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = baggins/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

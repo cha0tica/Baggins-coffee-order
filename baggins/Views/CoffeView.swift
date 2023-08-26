@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct CoffeView: View {
-    @Binding var coffee: Coffee?
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var cartController: CartController
+    //@EnvironmentObject var cartManager: CartManager
+    
+    @Binding var coffee: Coffee?
+    @StateObject private var cartManager = CartManager()
     @State private var selectedSizeIndex = 0 // Индекс выбранного размера
+    
+    //var product: Coffee
     
     var body: some View {
         if let coffee = coffee {
@@ -67,7 +73,12 @@ struct CoffeView: View {
                             .foregroundColor(.black)
                         
                         Button(action: {
-                            // Добавить в корзину
+                            //cartController.addToCart(coffee: coffee, selectedSizeIndex: selectedSizeIndex)
+                            cartController.addToCart(coffee: coffee, selectedSizeIndex: selectedSizeIndex)
+
+                            print("Добавили в корзину \(coffee.coffee) размером \(coffee.sizes[selectedSizeIndex].size) за \(coffee.sizes[selectedSizeIndex].price) рублей")
+                            print("Количество товаров в корзине \(cartController.numberOfProducts)")
+                            print("Вот что записали в coffeeList: \(cartController.coffeeList.last)")
                         }) {
                             Text("Добавить в корзину")
                                 .font(.headline)
@@ -78,6 +89,7 @@ struct CoffeView: View {
                         }
                     }
                     .padding(.horizontal)
+                    
                 }
             }
         }
@@ -86,7 +98,9 @@ struct CoffeView: View {
 
 struct CoffeView_Previews: PreviewProvider {
     static var previews: some View {
-        let tempCoffee: Coffee? = SeasnonItemsMenu.first // Используйте первый кофе из списка для превью
+        let tempCoffee: Coffee? = SeasnonItemsMenu.first
         
-        return CoffeView(coffee: .constant(tempCoffee))    }
+        return CoffeView(coffee: .constant(tempCoffee))
+            .environmentObject(CartController())
+    }
 }
