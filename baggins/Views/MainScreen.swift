@@ -11,22 +11,9 @@ struct MainScreen: View {
 
     @State private var isCoffeeModalPresented = false
         @State private var selectedCoffee = ClassicItemsMenu.first
-        //@StateObject private var cartManager = CartManager()
         @State private var selectedCategoryIndex = 0
-        //@State var numberOfProducts = 0
-        //@EnvironmentObject var cartController: CartController
         @StateObject private var cartController = CartController()
-        //@Binding var numberOfProducts: Int
-    
-//    @State private var isCoffeeModalPresented = false
-//    @State private var selectedCoffee = ClassicItemsMenu.first
-//    //@StateObject private var cartManager = CartManager()
-//    @State private var selectedCategoryIndex = 0
-//    //@State var numberOfProducts = 0
-//    @EnvironmentObject var cartController: CartController
-//    //@StateObject private var cartController = CartController()
-//    @Binding var numberOfProducts : Int
-    
+
     private let menuType = ["Классика", "Фирменные напитки", "Сезонное меню"]
     
     var body: some View {
@@ -88,6 +75,7 @@ struct MainScreen: View {
                             })
                             
                             // ToDo: Эта часть должна прилепляться...
+                            
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 15) {
                                     ForEach(menuType.indices, id: \.self) { index in
