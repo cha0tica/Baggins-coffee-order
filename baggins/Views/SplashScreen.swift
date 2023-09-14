@@ -9,19 +9,17 @@ import SwiftUI
 
 struct SplashScreen: View {
     @State private var isActive = false
-    @State private var opacity = 0.5
-    @State private var size = 0.5
+    @State private var size = 0.8
     
     var body: some View {
         if isActive {
             MainScreen()
         } else {
             ZStack {
-                GeometryReader { geometry in
+                VStack {
                     Image("Background")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
                         .clipped()
                 }
                 .edgesIgnoringSafeArea(.all)
@@ -30,16 +28,16 @@ struct SplashScreen: View {
                     Image("Logo")
                     Spacer()
                 }
-                .padding(.top, 100)
-                .onAppear() {
-                    withAnimation(.easeIn(duration: 2.0)) {
-                        self.size = 1.0
-                        self.opacity = 1.0
-                    }
-                }
+                .padding(.top, 150)
+                .scaleEffect(size)
+                                .onAppear {
+                                    withAnimation(.easeOut(duration: 2.0)) {
+                                        self.size = 1
+                                    }
+                                }
             }
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                     withAnimation {
                         self.isActive = true
                     }

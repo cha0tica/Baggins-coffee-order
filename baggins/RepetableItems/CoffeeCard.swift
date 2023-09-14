@@ -41,18 +41,15 @@ struct CoffeeCard: View {
                         .foregroundColor(.black)
                 }
                 Spacer()
-                
-                //Button(action: {}, label: {
-                    Image(systemName: "arrow.right.circle.fill")
-                        .foregroundColor(Color("BagginsRed"))
-                //})
-                .frame(height: 40)
-                .font(.system(size: 25))
+                Image(systemName: "arrow.right.circle.fill")
+                    .foregroundColor(Color("BagginsRed"))
+                    .frame(height: 40)
+                    .font(.system(size: 25))
             }
         }
         .padding()
         .background(Color.white)
         .cornerRadius(10)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5) // настройка непрозрачности тени
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
     }
 }

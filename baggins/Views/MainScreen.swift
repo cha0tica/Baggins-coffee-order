@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MainScreen: View {
-
+    
     @State private var isCoffeeModalPresented = false
-        @State private var selectedCoffee = ClassicItemsMenu.first
-        @State private var selectedCategoryIndex = 0
-        @StateObject private var cartController = CartController()
-
+    @State private var selectedCoffee = ClassicItemsMenu.first
+    @State private var selectedCategoryIndex = 0
+    @StateObject private var cartController = CartController()
+    
     private let menuType = ["Классика", "Фирменные напитки", "Сезонное меню"]
     
     var body: some View {
@@ -57,8 +57,8 @@ struct MainScreen: View {
                             }
                         }
                 }
-                
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 5)
                 
                 // Scrolling Screen...
                 ScrollView(.vertical, showsIndicators: false) {
@@ -71,11 +71,10 @@ struct MainScreen: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(height: 300)
-                                    .padding(.bottom)
+                                    .padding(.vertical)
                             })
                             
-                            // ToDo: Эта часть должна прилепляться...
-                            
+                            // Sticky Menu
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 15) {
                                     ForEach(menuType.indices, id: \.self) { index in
@@ -87,8 +86,6 @@ struct MainScreen: View {
                                             .onTapGesture {
                                                 withAnimation(.spring()) {
                                                     selectedCategoryIndex = index
-                                                    print(selectedCategoryIndex)
-                                                    // Выполняем прокрутку к соответствующему разделу
                                                     scrollViewProxy.scrollTo(index, anchor: .top)
                                                 }
                                             }
@@ -97,34 +94,31 @@ struct MainScreen: View {
                                 }
                                 .padding(.horizontal)
                             }
-                            .overlay(
-                                GeometryReader { proxy in
-                                    Color.clear.preference(key: ViewOffsetKey.self, value: proxy.frame(in: .global).minY)
-                                }
-                                    .frame(height: 1)
-                                , alignment: .top
-                            )
-                            // ToDo: Тут заканчивается зона прилепления
+                            .frame(height: 55)
+                            .background(.white)
+                            .id(0)
                             
+                            .sticky()
+                            
+                            // End of sticky
                             
                             // Classic Menu...
                             HStack {
+                                
                                 Text("Классическое меню")
                                     .fontWeight(.bold)
                                     .font(.system(size: 22))
                             }
                             .padding(.horizontal)
-                            .padding(.vertical, 5)
-                            .id(0)
+                            .padding(.top, 10)
                             
-                            // Items...
+                            // ClassicItems...
                             HStack(spacing: 15) {
                                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), spacing: 15) {
                                     ForEach(ClassicItemsMenu) { coffee in
                                         CoffeeCard(coffee: coffee)
                                             .onTapGesture {
                                                 selectedCoffee = coffee
-                                                print(selectedCoffee)
                                                 isCoffeeModalPresented = true
                                             }
                                     }
@@ -139,17 +133,16 @@ struct MainScreen: View {
                                     .font(.system(size: 22))
                             }
                             .padding(.horizontal)
-                            .padding(.vertical, 20)
+                            .padding(.top, 60)
                             .id(1)
                             
-                            // Items...
+                            // Branded Items...
                             HStack(spacing: 15) {
                                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 15)], spacing: 15) {
                                     ForEach(BrandedItemsMenu) { coffee in
                                         CoffeeCard(coffee: coffee)
                                             .onTapGesture {
                                                 selectedCoffee = coffee
-                                                print(selectedCoffee)
                                                 isCoffeeModalPresented = true
                                             }
                                     }
@@ -158,23 +151,22 @@ struct MainScreen: View {
                             .padding(.horizontal)
                             
                             // Season Menu...
-                            HStack {
+                            VStack {
                                 Text("Cезонное меню")
                                     .fontWeight(.bold)
                                     .font(.system(size: 22))
                             }
                             .padding(.horizontal)
-                            .padding(.vertical, 20)
+                            .padding(.top, 60)
                             .id(2)
                             
-                            // Items...
+                            // Season Items...
                             HStack(spacing: 15) {
                                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 15)], spacing: 15) {
                                     ForEach(SeasnonItemsMenu) { coffee in
                                         CoffeeCard(coffee: coffee)
                                             .onTapGesture {
                                                 selectedCoffee = coffee
-                                                print(selectedCoffee)
                                                 isCoffeeModalPresented = true
                                             }
                                     }
@@ -182,7 +174,9 @@ struct MainScreen: View {
                             }
                             .padding(.horizontal)
                         }
-                        
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .toolbarBackground(.white, for: .navigationBar)
+                                    .toolbarBackground(.visible, for: .navigationBar)
                         .sheet(isPresented: $isCoffeeModalPresented) {
                             if let selectedCoffee = selectedCoffee {
                                 CoffeView(coffee: $selectedCoffee)
@@ -191,11 +185,14 @@ struct MainScreen: View {
                         }
                     }
                 }
+                .coordinateSpace(name: "Container")
             }
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+
     }
 }
-
 
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
@@ -204,32 +201,26 @@ struct MainScreen_Previews: PreviewProvider {
     }
 }
 
-struct ViewOffsetKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
+struct Sticky : ViewModifier {
+    @State var stickyFrame: CGRect = .zero
+    var isStickying : Bool {
+        stickyFrame.minY < 0
+    }
+    func body(content: Content) -> some View {
+        content
+            .offset(y: isStickying ? -stickyFrame.minY : 0)
+            .zIndex(isStickying ? .infinity : 0)
+            .overlay(GeometryReader {proxy in
+                let frame = proxy.frame(in: .named("Container"))
+                Color.clear
+                    .onAppear { stickyFrame = frame }
+                    .onChange(of: frame) { stickyFrame = $0 }
+            })
     }
 }
 
-struct OffsetKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
 extension View {
-    @ViewBuilder
-    func offset(coordinateSpace: CoordinateSpace, complition: @escaping (CGFloat)->()) -> some View {
-        self
-            .overlay {
-                GeometryReader { proxy in
-                    let minY = proxy.frame(in: coordinateSpace).minY
-                    Color.clear
-                        .preference(key: OffsetKey.self, value: minY)
-                        .onPreferenceChange(OffsetKey.self){ value in
-                            complition(value)
-                        }
-                }
-            }
+    func sticky() -> some View {
+        modifier(Sticky())
     }
 }

@@ -10,22 +10,17 @@ import SwiftUI
 struct CoffeView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var cartController: CartController
-    //@EnvironmentObject var cartManager: CartManager
     
     @Binding var coffee: Coffee?
     @StateObject private var cartManager = CartManager()
-    @State private var selectedSizeIndex = 0 // Индекс выбранного размера
-    
-    //var product: Coffee
+    @State private var selectedSizeIndex = 0
     
     var body: some View {
         if let coffee = coffee {
             VStack {
-                //TopMenu()
                 HStack {
                     Spacer()
                     Button(action: {
-                        // Закрыть модальное окно
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "xmark.circle.fill")
@@ -52,7 +47,7 @@ struct CoffeView: View {
                             .font(.system(size: 16))
                             .foregroundColor(.black)
                         
-                        //Выбор размера ...
+                        //Choosing size...
                         Picker(selection: $selectedSizeIndex, label: Text("Объем: ")) {
                             ForEach(coffee.sizes.indices, id: \.self) { index in
                                 Text("\(coffee.sizes[index].size) мл")
@@ -60,7 +55,7 @@ struct CoffeView: View {
                         }
                         .pickerStyle(SegmentedPickerStyle())
                         .padding(.horizontal)
-                        //Размер выбрали
+                        //Size is choosed
                         
                         Text("БЖУ: \(coffee.sizes[selectedSizeIndex].value)")
                             .fontWeight(.light)
@@ -73,12 +68,7 @@ struct CoffeView: View {
                             .foregroundColor(.black)
                         
                         Button(action: {
-                            //cartController.addToCart(coffee: coffee, selectedSizeIndex: selectedSizeIndex)
                             cartController.addToCart(coffee: coffee, selectedSizeIndex: selectedSizeIndex)
-
-                            print("Добавили в корзину \(coffee.coffee) размером \(coffee.sizes[selectedSizeIndex].size) за \(coffee.sizes[selectedSizeIndex].price) рублей")
-                            print("Количество товаров в корзине \(cartController.numberOfProducts)")
-                            print("Вот что записали в coffeeList: \(cartController.coffeeList.last)")
                         }) {
                             Text("Добавить в корзину")
                                 .font(.headline)
@@ -89,7 +79,6 @@ struct CoffeView: View {
                         }
                     }
                     .padding(.horizontal)
-                    
                 }
             }
         }

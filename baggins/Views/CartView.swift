@@ -9,12 +9,10 @@ import SwiftUI
 
 struct CartView: View {
     
-    // @Binding var coffee: Coffee?
-        @Environment(\.presentationMode) var presentationMode
-        @EnvironmentObject var cartController: CartController
-        //@EnvironmentObject var cartManager: CartManager
-        @State private var selectedSizeIndex = 0 // Индекс выбранного размера
-        @State var numberOfProducts: Int = 0
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var cartController: CartController
+    @State private var selectedSizeIndex = 0
+    @State var numberOfProducts: Int = 0
     
     
     var body: some View {
@@ -29,17 +27,14 @@ struct CartView: View {
                             .font(.system(size: 22))
                             .padding()
                         
-                        
                         ForEach(cartController.coffeeList) { cartItem in
                             NavigationLink {
-                                CartProductView(coffeeCard: cartItem) // Передаем coffeeCard
+                                CartProductView(coffeeCard: cartItem)
                             } label: {
-                                CartProductView(coffeeCard: cartItem) // Передаем coffeeCard
+                                CartProductView(coffeeCard: cartItem)
                             }
                         }
-
                         
-
                         HStack{
                             Text("Всего: ")
                                 .fontWeight(.bold)
@@ -61,13 +56,8 @@ struct CartView: View {
                                 .padding(.horizontal)
                         }
                     }
-                    //.padding()
                 }
-                
-                
-                
-                
-            }else{
+            } else {
                 VStack(spacing: 10){
                     Image(systemName: "cup.and.saucer")
                         .resizable()
@@ -85,14 +75,11 @@ struct CartView: View {
                     .padding()
                     .multilineTextAlignment(.center)
                 }
-                
             }
-            
-            
         }
         .padding(.top)
         .navigationBarTitle("", displayMode: .inline)
-        .navigationBarBackButtonHidden(true) // Скрытие стандартной кнопки "Back"
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
                                 Image(systemName: "arrow.backward")
             .foregroundColor(Color("BagginsRed"))
@@ -102,12 +89,5 @@ struct CartView: View {
                 presentationMode.wrappedValue.dismiss()
             }
         )
-    }
-}
-
-struct CartView_Previews: PreviewProvider {
-    static var previews: some View {
-        CartView()
-            .environmentObject(CartManager())
     }
 }
